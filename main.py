@@ -8,7 +8,3 @@ if uploaded_file is not None:
     st.write(df.head())
 else:
     st.write("CSV 파일을 업로드해주세요.")
-
-uploaded_file = list(uploaded_file)
-money={}
-print(uploaded_file)
