@@ -1,17 +1,16 @@
 import streamlit as st
+import pandas as pd
 
-# 파일 업로드 위젯 표시
-uploaded_file = st.file_uploader("파일을 업로드하세요", type=['csv', 'txt', 'xlsx', 'pdf'])
+st.title("CSV 파일 업로드 예제")
+
+# 파일 업로드 위젯
+uploaded_file = st.file_uploader("CSV 파일을 업로드하세요", type=["csv"])
 
 # 파일이 업로드되었는지 확인
 if uploaded_file is not None:
-    st.write("업로드된 파일 이름:", uploaded_file.name)
+    # CSV 파일 읽기
+    df = pd.read_csv(uploaded_file)
     
-    # 예: CSV 파일 처리
-    if uploaded_file.type == "text/csv":
-        import pandas as pd
-        df = pd.read_csv(uploaded_file)
-        st.write("데이터 미리보기:")
-        st.dataframe(df)
-    else:
-        st.write("파일은 업로드되었지만, 미리보기는 지원되지 않는 형식입니다.")
+    # 데이터프레임 출력
+    st.write("업로드된 데이터:")
+    st.dataframe(df)
