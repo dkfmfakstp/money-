@@ -1,16 +1,25 @@
 import streamlit as st
+import pandas as pd
 import matplotlib.pyplot as plt
 
-st.title("간단한 막대그래프 예제")
+st.title("CSV 파일 업로드 후 막대그래프 그리기")
 
-# 샘플 데이터
-categories = ['사과', '바나나', '체리', '오렌지']
-values = [10, 15, 7, 12]
+uploaded_file = st.file_uploader("CSV 파일을 업로드하세요", type=["csv"])
 
-fig, ax = plt.subplots()
-ax.bar(categories, values)
-ax.set_xlabel("과일")
-ax.set_ylabel("수량")
-ax.set_title("과일별 수량 막대그래프")
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
 
-st.pyplot(fig)
+    # 연도가 문자열로 되어있다면 문자열로 변환
+    df['연도'] = df['연도'].astype(str)
+
+    st.write("데이터 미리보기")
+    st.dataframe(df.head())
+
+    fig, ax = plt.subplots()
+    ax.bar(df['연도'], df['생활물가지수'])
+    ax.set_xlabel('연도')
+    ax.set_ylabel('생활물가지수')
+    ax.set_title('연도별 생활물가지수 막대그래프')
+    plt.xticks(rotation=45)
+
+    st.pyplot(fig)
