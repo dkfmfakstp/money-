@@ -34,5 +34,3 @@ if uploaded_file is not None:
             title="연도별 생활물가지수"
         )
         st.altair_chart(chart)
-    else:
-        st.error("CSV 파일에 '연도' 또는 '생활물가지수' 컬럼이 없습니다.")
