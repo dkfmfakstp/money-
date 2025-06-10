@@ -16,3 +16,20 @@ if uploaded_file is not None:
     
     st.write("업로드된 데이터:")
     st.dataframe(df)
+
+
+if '연도' in df.columns and '생활물가지수' in df.columns:
+        # 연도 컬럼이 숫자가 아니라면 문자열로 변환
+        df['연도'] = df['연도'].astype(str)
+
+        chart = alt.Chart(df).mark_bar().encode(
+            x=alt.X('연도', sort=None, title='연도'),
+            y=alt.Y('생활물가지수', title='생활물가지수'),
+            tooltip=['연도', '생활물가지수']
+        ).properties(
+            width=700,
+            height=400,
+            title="연도별 생활물가지수"
+        )
+        st.altair_chart(chart)
+
