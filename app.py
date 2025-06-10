@@ -19,7 +19,8 @@ if uploaded_file is not None:
     st.dataframe(df)
 
 
-if '연도' in df.columns and '생활물가지수' in df.columns:
+# 연도와 생활물가지수 컬럼이 있는지 확인
+    if '연도' in df.columns and '생활물가지수' in df.columns:
         # 연도 컬럼이 숫자가 아니라면 문자열로 변환
         df['연도'] = df['연도'].astype(str)
 
@@ -33,4 +34,5 @@ if '연도' in df.columns and '생활물가지수' in df.columns:
             title="연도별 생활물가지수"
         )
         st.altair_chart(chart)
-
+    else:
+        st.error("CSV 파일에 '연도' 또는 '생활물가지수' 컬럼이 없습니다.")
