@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
 
-st.title("CSV 파일 업로드 예제")
+st.title("생활물가지수 연도별 막대 그래프")
 
 uploaded_file = st.file_uploader("CSV 파일을 업로드하세요", type=["csv"])
 
