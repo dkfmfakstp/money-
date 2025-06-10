@@ -13,10 +13,18 @@ if uploaded_file is not None:
         st.error("파일 인코딩 문제 발생: cp949 인코딩으로 읽을 수 없습니다.")
         st.stop()
 
-    df['연도'] = df['연도'].astype(str)
+    # 컬럼명 공백 제거
+    df.columns = df.columns.str.strip()
 
+    st.write("컬럼명 리스트:", df.columns.tolist())
     st.write("데이터 미리보기")
     st.dataframe(df.head())
+
+    if '연도' not in df.columns or '생활물가지수' not in df.columns:
+        st.error("'연도' 또는 '생활물가지수' 컬럼이 없습니다. 컬럼명을 확인해주세요.")
+        st.stop()
+
+    df['연도'] = df['연도'].astype(str)
 
     fig, ax = plt.subplots()
     ax.bar(df['연도'], df['생활물가지수'])
