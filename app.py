@@ -11,17 +11,18 @@ def download_and_set_font():
 
     if not os.path.exists(font_path):
         os.makedirs(font_dir, exist_ok=True)
-        url = "https://github.com/naver/nanumfont/blob/master/ttf/NanumGothic.ttf?raw=true"
+        # ✅ 수정된 raw.githubusercontent 링크
+        url = "https://raw.githubusercontent.com/naver/nanumfont/master/ttf/NanumGothic.ttf"
         urllib.request.urlretrieve(url, font_path)
 
     font_name = fm.FontProperties(fname=font_path).get_name()
     plt.rc('font', family=font_name)
     plt.rcParams['axes.unicode_minus'] = False
 
-# ▶️ 폰트 다운로드 및 설정
+# ▶️ 한글 폰트 다운로드 및 설정
 download_and_set_font()
 
-# Streamlit UI 시작
+# 📊 Streamlit UI
 st.title("CSV 파일 업로드 후 막대그래프 그리기")
 
 uploaded_file = st.file_uploader("CSV 파일을 업로드하세요", type=["csv"])
