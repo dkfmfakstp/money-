@@ -29,17 +29,6 @@ if uploaded_file is not None:
 
     df['연도'] = df['연도'].astype(str)
 
-    # 한글 폰트 설정 (예: NanumGothic)
-font_path = "/usr/share/fonts/truetype/nanum/NanumGothic.ttf"  # 리눅스용 NanumGothic 위치
-if not os.path.exists(font_path):
-    # Streamlit 환경이나 로컬 환경에 따라 다른 경로 또는 대체 폰트가 필요할 수 있음
-    font_path = fm.findfont("Malgun Gothic")  # Windows용
-font_name = fm.FontProperties(fname=font_path).get_name()
-plt.rc('font', family=font_name)
-
-# 마이너스 기호 깨짐 방지
-plt.rcParams['axes.unicode_minus'] = False
-
     fig, ax = plt.subplots()
     ax.bar(df['연도'], df['생활물가지수'])
     ax.set_xlabel('연도')
